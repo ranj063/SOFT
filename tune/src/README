@@ -1,0 +1,39 @@
+Sample rate converter (SRC) Setup Tools
+=======================================
+
+This is a tool to set up SRC conversions sample rates list, define
+quality related parameters, and test the C implementation for a number
+of objective audio quality parameters.
+
+The tools need GNU Octave version 4.0.0 or later with octave-signal
+package.
+
+src_2stage.m
+============
+
+Creates the header files to include to C into directory "include". A
+report of create modes is written to directory "reports". The
+coefficients need to be copied to directory
+sof.git/src/include/reef/audio/coefficients/src.
+
+The default quality of SRC is defined in module src_param.m. The
+quality impacts the complexity and coefficents tables size of SRC.
+
+
+src_test.m
+==========
+
+Tests dynamic range (DR) in dB(CCIR-RMS), frequency response (FR) as
++/- dB for a bandwidth, and does a sine wave chirp spectrogram plot to
+visualize SRC characteristic like aliasing.
+
+This tool helps to find out a suitable quality vs. complexity tradeoff.
+
+An executable "src_test" need to be present in this directory. The
+compilation assumes that the FW build directory sof.git is parallel to
+this directory soft.git. The SRC coefficients are included from the
+SRC coefficients files location
+sof.git/src/include/reef/audio/coefficients/src
+
+The compilation of the 32 bit C test bench requires in 64 bit Ubuntu
+packages libc6-dev-amd64 and lib32gcc-6-dev.

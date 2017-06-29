@@ -22,6 +22,7 @@ AC_OUTPUT([
 	topology/m4/Makefile
 	topology/sof/Makefile
 	topology/test/Makefile
+	tune/src/Makefile
 ])
 
 echo "
