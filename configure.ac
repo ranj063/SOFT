@@ -24,6 +24,7 @@ AC_OUTPUT([
 	topology/test/Makefile
 	tune/src/Makefile
 	tune/eq/Makefile
+	tune/volume/Makefile
 ])
 
 echo "
