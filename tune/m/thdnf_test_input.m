@@ -7,7 +7,7 @@ function test = thdnf_test_input(test)
 %
 % Input parameters
 % t.fs        - sample rate
-% t.bits      - signal word length
+% t.bits_in   - signal word length
 % t.ch        - mix test signal to channel ch
 % t.nch       - total number of channels in data
 %
@@ -61,15 +61,15 @@ function test = thdnf_test_input(test)
 
 if nargin < 1
         fprintf('Warning, using default parameters!\n');
-        test.fs = 48e3; test.f_start=20; test.f_end=20e3; test.bits=32; test.ch=1; test.nch=1;
+        test.fs = 48e3; test.f_start=20; test.f_end=20e3; test.bits_in=32; test.ch=1; test.nch=1;
 end
 
 if test.ch == 0
         test.ch = 1+round(rand(1,1)*(test.nch-1)); % Test random channel 1..Nch
 end
 
-fprintf('Using parameters Fstart=%.0f Hz, Fend=%.0f Hz, Fs=%.1f Hz, bits=%d, ch=%d, Nch=%d\n', ...
-        test.f_start, test.f_end, test.fs/1e3, test.bits, test.ch, test.nch );
+fprintf('Using parameters Fstart=%.0f Hz, Fend=%.0f Hz, Fs=%.1f Hz, bits_in=%d, ch=%d, Nch=%d\n', ...
+        test.f_start, test.f_end, test.fs/1e3, test.bits_in, test.ch, test.nch );
 
 test.fn_in = 'thdnf_test_in.txt';
 test.fn_out = 'thdnf_test_out.txt';

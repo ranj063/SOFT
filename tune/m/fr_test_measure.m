@@ -23,7 +23,7 @@ function test = fr_test_measure(test)
 % t.ph          - Plot handle
 %
 % E.g.
-% t.fs=48e3; t.f_max=20e3; t.bits=16; t.ch=1; t.nch=2; t=fr_test_input(t);
+% t.fs=48e3; t.f_max=20e3; t.bits_out=16; t.ch=1; t.nch=2; t=fr_test_input(t);
 % t.fn_out=t.fn_in; t.f_lo=20; t.f_hi=20e3; t.rp_max=[]; t.mask_f=[];
 % t=fr_test_measure(t);
 %

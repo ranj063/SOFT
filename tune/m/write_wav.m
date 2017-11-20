@@ -1,17 +1,10 @@
-function [x, nx] = load_test_output(test)
+function write_wav(fn, x, fs, bits_per_sample)
 
-%% [x, n] = load_test_output(t)
-%
-% Input
-% t.fn_out - file name to load
-% t.bits_out   - word length of data
-% t.ch     - channel to extract
-% t.nch    - number of channels in (interleaved) data
-%
-% Output
-% x - samples
-% n - number of samples
-%
+% Create a wav file from sample audio data
+% fn: output file name
+% x: audio data
+% fs: sampling frequency
+% bits_per_sample: number of bits per sample
 
 %%
 % Copyright (c) 2017, Intel Corporation
@@ -43,23 +36,16 @@ function [x, nx] = load_test_output(test)
 % Author: Seppo Ingalsuo <seppo.ingalsuo@linux.intel.com>
 %
 
-%% Check that output file exists
-if exist(test.fn_out)
-        fprintf('Reading output data file %s...\n', test.fn_out);
-        out = load(test.fn_out);
+%% Interleave channels if not yet done
+sx = size(x);
+if sx(2) > 1
+        xd = zeros(sx(1)*sx(2),1, 'int32');
+        for n=1:sx(2)
+                xd(n:sx(2):end) = x(:,n);
+        end
+        audiowrite(fn, xd, fs, 'BitsPerSample', bits_per_sample); 
 else
-        out = [];
-end
-
-%% Exctract channel to measure
-scale = 1/2^(test.bits_out-1);
-lout = length(out);
-nx = floor(lout/test.nch);
-x = zeros(nx,length(test.ch));
-j = 1;
-for ch = test.ch
-        x(:,j) = out(ch:test.nch:end)*scale;
-        j = j+1;
+        audiowrite(fn, x, fs, 'BitsPerSample', bits_per_sample);
 end
 
 end

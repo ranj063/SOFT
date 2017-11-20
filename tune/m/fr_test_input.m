@@ -8,7 +8,7 @@ function test = fr_test_input(test)
 % Input parameters
 % t.f_max     - maximum frequency of sweep, set e.g. to 0.99*fs/2
 % t.fs        - sample rate
-% t.bits      - number of bits in signal
+% t.bits_in   - number of bits in signal
 % t.ch        - mix test signal to channel ch, e.g. set to [1 2] to measure
 %               two channels
 % t.nch       - total number of channels in data
@@ -38,7 +38,7 @@ function test = fr_test_input(test)
 % t.ts        - Tone start times
 %
 % E.g.
-% t.fs=48e3; t.f_max=20e3; t.bits=16; t.ch=1; t.nch=2; t = fr_test_input(t);
+% t.fs=48e3; t.f_max=20e3; t.bits_in=16; t.ch=1; t.nch=2; t = fr_test_input(t);
 %
 
 %%
@@ -77,15 +77,15 @@ function test = fr_test_input(test)
 if nargin < 1
         fprintf('Warning, using default parameters!\n');
         test.fs = 48e3; test.f_max = 0.99*test.fs/2; test.ch=1; test.nch=1;
-        test.bits=32;
+        test.bits_in=32;
 end
 
 if test.ch == 0
         test.ch = 1+round(rand(1,1)*(test.nch-1)); % Test random channel 1..Nch
 end
 
-fprintf('Using parameters Fmax=%.1f kHz, Fs=%.1f, ch=%d, Nch=%d, bits=%d\n', ...
-        test.f_max/1e3, test.fs/1e3, test.ch, test.nch, test.bits);
+fprintf('Using parameters Fmax=%.1f kHz, Fs=%.1f, ch=%d, Nch=%d, bits_in=%d\n', ...
+        test.f_max/1e3, test.fs/1e3, test.ch, test.nch, test.bits_in);
 
 test.fn_in = 'fr_test_in.txt';
 test.fn_out = 'fr_test_out.txt';

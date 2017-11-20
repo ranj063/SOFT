@@ -70,6 +70,9 @@ end
 
 %% Delay to first tone, length of tone in samples
 d = d_start + round(test.mark_t*test.fs);
+if (d < 0)
+	error('Invalid negative delay seen. Test play or capture quality may be poor');
+end
 nt = round(test.tl*test.fs);
 nt_use = nt -round(test.is*test.fs) -round(test.ie*test.fs);
 if nt_use < 0

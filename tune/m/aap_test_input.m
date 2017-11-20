@@ -9,7 +9,7 @@ function test = aap_test_input(test)
 % t.f_start   - start frequency
 % t.f_end     - end frequency
 % t.fs        - sample rate
-% t.bits      - number of bits in signal
+% t.bits_in   - number of bits in signal
 % t.ch        - mix test signal to channel ch
 % t.nch       - total number of channels in data
 %
@@ -70,8 +70,8 @@ if test.ch == 0
         test.ch = 1+round(rand(1,1)*(test.nch-1)); % Test random channel 1..Nch
 end
 
-fprintf('Using parameters Fstart=%d Hz, Fend=%d Hz, Fs=%.1f kHz, bits=%d, ch=%d, nch=%d\n', ...
-        test.f_start, test.f_end, test.fs, test.bits, test.ch, test.nch);
+fprintf('Using parameters Fstart=%d Hz, Fend=%d Hz, Fs=%.1f kHz, bits_in=%d, ch=%d, nch=%d\n', ...
+        test.f_start, test.f_end, test.fs, test.bits_in, test.ch, test.nch);
 
 
 test.fn_in = 'aap_test_in.txt';

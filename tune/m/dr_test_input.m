@@ -7,7 +7,7 @@ function test = dr_test_input(test)
 %
 % Input parameters
 % t.fs        - sample rate
-% t.bits      - signal word length
+% t.bits_in   - signal word length
 % t.ch        - mix test signal to channel ch
 % t.nch       - total number of channels in data
 %
@@ -60,7 +60,7 @@ function test = dr_test_input(test)
 
 if nargin < 1
         fprintf('Warning, using default parameters!\n');
-        test.fs = 48e3; test.bits=32; test.ch=1; test.nch=1;
+        test.fs = 48e3; test.bits_in=32; test.ch=1; test.nch=1;
 end
 
 if test.ch == 0
@@ -68,7 +68,7 @@ if test.ch == 0
 end
 
 fprintf('Using parameters Fs=%.1f, bits=%d, ch=%d, Nch=%d\n', ...
-        test.fs/1e3, test.bits, test.ch, test.nch );
+        test.fs/1e3, test.bits_in, test.ch, test.nch );
 
 %% Test tone parameters
 test.fn_in = 'dr_test_in.txt';

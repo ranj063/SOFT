@@ -7,7 +7,7 @@ function test = g_test_input(test)
 %
 % Input parameters
 % t.fs        - sample rate
-% t.bits      - signal word length
+% t.bits_in   - signal word length
 % t.ch        - mix test signal to channel ch
 % t.nch       - total number of channels in data
 %
@@ -69,8 +69,9 @@ if test.ch == 0
         test.ch = 1+round(rand(1,1)*(test.nch-1)); % Test random channel 1..Nch
 end
 
-fprintf('Using parameters Fs=%.1f, bits=%d, ch=%d, Nch=%d\n', ...
-        test.fs/1e3, test.bits, test.ch, test.nch );
+fprintf('Using parameters Fs=%.1f, bits_in=%d', test.fs/1e3, test.bits_in);
+fprintf(', ch=%d', test.ch );
+fprintf(', Nch=%d\n', test.nch );
 
 test.fn_in = 'g_test_in.txt';
 test.fn_out = 'g_test_out.txt';
