@@ -29,6 +29,7 @@
  */
 
 #include "common_test.h"
+#include <reef/ipc.h>
 
 /* Internal buffer */
 #define TEST_BENCH_DEADLINE 1000 /* 1 ms */
