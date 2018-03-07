@@ -25,6 +25,14 @@ C_CONTROLMIXER(Master Playback Volume, PIPELINE_ID,
 	Channel register and shift for Front Left/Right,
 	LIST(`	', KCONTROL_CHANNEL(FL, 1, 0), KCONTROL_CHANNEL(FR, 1, 1)))
 
+# Volume Mixer control with max value of 1 for switch type functionality to mute/unmute
+C_CONTROLMIXER(Master Playback Volume Mute Switch, PIPELINE_ID,
+	CONTROLMIXER_OPS(volsw, 256 binds the mixer control to volume get/put handlers, 256, 256),
+	CONTROLMIXER_MAX(max value 1 indicates switch type control, 1),
+	false,
+	,
+	Channel register and shift for Front Left/Right,
+	LIST(`	', KCONTROL_CHANNEL(FL, 1, 0), KCONTROL_CHANNEL(FR, 1, 1)))
 #
 # Components and Buffers
 #
@@ -34,7 +42,7 @@ C_CONTROLMIXER(Master Playback Volume, PIPELINE_ID,
 W_PCM_PLAYBACK(Passthrough Playback, PIPELINE_DMAC, PIPELINE_DMAC_CHAN, 2, 0, 2)
 
 # "Volume" has 2 source and 2 sink periods
-W_PGA(0, PIPELINE_FORMAT, 2, 2, 2, LIST(`		', "Master Playback Volume"))
+W_PGA(0, PIPELINE_FORMAT, 2, 2, 2, LIST(`		', "Master Playback Volume", "Master Playback Volume Mute Switch"))
 
 # Playback Buffers
 W_BUFFER(0, COMP_BUFFER_SIZE(2,
