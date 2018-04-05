@@ -37,10 +37,11 @@ C_CONTROLMIXER(Master Playback Volume Mute Switch, PIPELINE_ID,
 	LIST(`	', KCONTROL_CHANNEL(FL, 1, 0), KCONTROL_CHANNEL(FR, 1, 1)))
 
 # EQ Bytes control with max value of 255
-C_CONTROLBYTES(EQ Byte Control, PIPELINE_ID,
+C_CONTROLBYTES(EQ, PIPELINE_ID,
 	CONTROLBYTES_OPS(bytes, 258 binds the mixer control to bytes get/put handlers, 258, 258),
-	0, 8, 255,
-	CONTROLBYTES_MAX(, 255))
+	CONTROLBYTES_EXTOPS(258 binds the mixer control to bytes get/put handlers, 258, 258),
+	, , ,
+	CONTROLBYTES_MAX(, 10))
 
 #
 # Components and Buffers
@@ -55,7 +56,7 @@ W_PGA(0, PIPELINE_FORMAT, 2, 2, 2, LIST(`		', "Master Playback Volume",
 	"Master Playback Volume Mute Switch"))
 
 # "EQ 0" has 2 sink period and 2 source periods
-W_EQ(0, PIPELINE_FORMAT, 2, 2, 0, LIST(`		', "EQ Byte Control"))
+W_EQ(0, PIPELINE_FORMAT, 2, 2, 0, LIST(`		', "EQ"))
 
 # Playback Buffers
 W_BUFFER(0, COMP_BUFFER_SIZE(2,

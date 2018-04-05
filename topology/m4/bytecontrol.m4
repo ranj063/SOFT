@@ -17,8 +17,14 @@ define(`CONTROLBYTES_OPS',
 `ops."ctl" {'
 `		info STR($1)'
 `		#$2'
-`		get STR($3)'
-`		put STR($4)'
+`	}')
+
+dnl CONTROLMIXER_OPS(info, comment, get, put)
+define(`CONTROLBYTES_EXTOPS',
+`extops."extctl" {'
+`		#$1'
+`		get STR($2)'
+`		put STR($3)'
 `	}')
 
 dnl C_CONTROLMIXER(name, index, ops, base, num_regs, mask, max, tlv)
@@ -28,15 +34,21 @@ define(`C_CONTROLBYTES',
 `	# control belongs to this index group'
 `	index STR($2)'
 `'
-`	# control uses bespoke driver get/put/info ID'
+`	# control uses bespoke driver get/put/info ID for io ops'
 `	$3'
+`	# control uses bespoke driver get/put/info ID for ext ops'
+`	$4'
 `'
-`	base STR($4)'
-`	num_regs STR($5)'
-`	mask STR($6)'
-`	$7'
+`	base STR($5)'
+`	num_regs STR($6)'
+`	mask STR($7)'
 `	$8'
-
+`	$9'
+`	access ['
+`		tlv_write'
+`		tlv_read'
+`		tlv_callback'
+`	]'
 `}')
 
 divert(0)dnl
