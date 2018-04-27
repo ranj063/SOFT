@@ -22,6 +22,7 @@ AC_OUTPUT([
 	topology/m4/Makefile
 	topology/sof/Makefile
 	topology/test/Makefile
+	tune/Makefile
 	tune/src/Makefile
 	tune/eq/Makefile
 	tune/volume/Makefile
