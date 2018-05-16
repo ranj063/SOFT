@@ -14,7 +14,7 @@ dnl Initialize maintainer mode
 AM_MAINTAINER_MODE([enable])
 
 AC_PROG_CC
-
+LT_INIT
 AC_OUTPUT([
 	Makefile
 	rmbox/Makefile
@@ -24,6 +24,8 @@ AC_OUTPUT([
 	topology/m4/Makefile
 	topology/sof/Makefile
 	topology/test/Makefile
+	tune/Makefile
+	tune/test/Makefile
 ])
 
 echo "
