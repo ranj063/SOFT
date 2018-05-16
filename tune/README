@@ -1,0 +1,13 @@
+Running make in the root directory in sound-open-firmware-tools should build the tune directory and the testbench along with it.
+
+Please make sure to include the SOF install directory in the prefix while running configure if not using default directory for installation.
+
+Set up the command line arguments and invoke the testbench using the included "run_testbench.sh" script.
+
+Testbench supports both text and raw input file formats
+
+Known Limitations:
+
+1. Testbench set up to work with simple volume topologies only currently.
+
+2. Please keep same file format for input and output files
