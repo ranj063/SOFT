@@ -131,27 +131,45 @@ define(`DAI_CLOCK',
 
 dnl DAI_TDM(slots, width, tx_mask, rx_mask)
 define(`DAI_TDM',
-`	tdm_slots	'STR($1)
+`tdm_slots	'STR($1)
 `	tdm_slot_width	'STR($2)
 `	tx_slots	'STR($3)
 `	rx_slots	'STR($4)
+)
+dnl SSP_CONFIG(format, mclk, bclk, fsync, tdm, ssp sample bits)
+define(`SSP_CONFIG',
+`	format		"'$1`"'
+`	'$2
+`	'$3
+`	'$4
+`	'$5
+`}'
+$6
+)
+
+dnl SSP_SAMPLE_BITS(type, idx, valid bits)
+define(`SSP_SAMPLE_BITS',
+`SectionVendorTuples."'N_DAI_CONFIG($1$2)`_tuples" {'
+`	tokens "sof_dai_tokens"'
+`	tuples."word" {'
+`		SOF_TKN_DAI_SAMPLE_BITS'	STR($3)
+`	}'
+`}'
+`SectionData."'N_DAI_CONFIG($1$2)`_data" {'
+`	tuples "'N_DAI_CONFIG($1$2)`_tuples"'
+`}'
 )
 
 dnl DAI Config)
 define(`N_DAI_CONFIG', `DAICONFIG.'$1)
 
-dnl DAI_CONFIG(type, idx, name, format, valid bits, mclk, bclk, fsync, tdm)
+dnl DAI_CONFIG(type, idx, name, ssp_config)
 define(`DAI_CONFIG',
 `SectionHWConfig."'$1$2`" {'
 `'
 `	id		"'$2`"'
-`	format		"'$4`"'
 `'
-`	'$6
-`	'$7
-`	'$8
-`	'$9
-`}'
+`	ifelse($1, `SSP', $4, `}')'
 `SectionVendorTuples."'N_DAI_CONFIG($1$2)`_tuples_str" {'
 `	tokens "sof_dai_tokens"'
 `	tuples."string" {'
@@ -161,16 +179,6 @@ define(`DAI_CONFIG',
 `SectionData."'N_DAI_CONFIG($1$2)`_data_str" {'
 `	tuples "'N_DAI_CONFIG($1$2)`_tuples_str"'
 `}'
-`SectionVendorTuples."'N_DAI_CONFIG($1$2)`_tuples" {'
-`	tokens "sof_dai_tokens"'
-`	tuples."word" {'
-`		SOF_TKN_DAI_SAMPLE_BITS'	STR($5)
-`	}'
-`}'
-`SectionData."'N_DAI_CONFIG($1$2)`_data" {'
-`	tuples "'N_DAI_CONFIG($1$2)`_tuples"'
-`}'
-`'
 `SectionBE."'$3`" {'
 `	index "0"'
 `	default_hw_conf_id	"'$2`"'
